@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_sqflite/home.dart';
+import 'package:get/get.dart';
+import 'package:project_sqflite/presentation/note_list/note_list_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,12 +12,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Notes',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: NoteListPage(),
     );
   }
 }
