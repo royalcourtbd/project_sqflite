@@ -31,14 +31,13 @@ class DatabaseHelper {
     final db = await open();
     final List<Map<String, dynamic>> map = await db.query(databaseTableName,
         orderBy: databaseEmployeeTableColumnName);
-    return List.generate(map.length, (index) {
-      return EmployeeModel.fromJson(map[index]);
-    });
+
+    return List.generate(
+        map.length, (index) => EmployeeModel.fromJson(map[index]));
   }
 
   static Future<int> updateDatabase(Map<String, dynamic> map) async {
     final db = await open();
-
     int id = map[databaseEmployeeTableColumnId];
     return await db.update(databaseTableName, map,
         where: '$databaseEmployeeTableColumnId = ?', whereArgs: [id]);

@@ -23,9 +23,8 @@ class DbHelper {
 
   initDb() async {
     Directory directory = await getApplicationDocumentsDirectory();
-
     String path = join(directory.path, dbName);
-
+ 
     return await openDatabase(path, version: dbVersion, onCreate: onCreate);
   }
 

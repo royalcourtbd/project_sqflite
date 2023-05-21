@@ -72,17 +72,32 @@ class EditNotePage extends StatelessWidget {
                           onEdited: () => Get.back<void>(),
                         )
                       : _editNotePresenter.insertNote(
+                          onLoading: () async {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const Dialog(
+                                  child: SizedBox(
+                                    height: 100,
+                                    // width: 100,
+                                    child: Center(
+                                        child: CircularProgressIndicator()),
+                                  ),
+                                );
+                              },
+                            );
+
+                            await Future.delayed(const Duration(seconds: 1));
+                            Get.back();
+                          },
                           employeeModel: EmployeeModel(
                             id: DateTime.now().microsecondsSinceEpoch,
                             name: titleController.text,
                             designation: description.text,
                           ),
-                          onInserted: () {
+                          onInserted: () async {
                             Get.back();
                           });
-                  // employeeModel?.id == null
-                  //     ? _editNotePresenter.saveNote(context)
-                  //     : _editNotePresenter.editNoteMethod(context);
                 },
                 child:
                     Text(employeeModel?.id == null ? 'Save Note' : 'Edit Note'),

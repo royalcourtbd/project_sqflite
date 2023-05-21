@@ -7,6 +7,7 @@ import 'dart:developer' as dev;
 class EditNotePresenter extends GetxController {
   final formKey = GlobalKey<FormState>();
   Future<void> insertNote({
+    required VoidCallback onLoading,
     required EmployeeModel? employeeModel,
     required VoidCallback onInserted,
   }) async {
@@ -16,6 +17,7 @@ class EditNotePresenter extends GetxController {
 
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
+      onLoading();
       DatabaseHelper.insertData(databaseTableName, note);
       onInserted();
     }
@@ -26,8 +28,13 @@ class EditNotePresenter extends GetxController {
       required VoidCallback onEdited}) async {
     if (employee == null) return;
     final employeeMap = employee.toJson();
-    DatabaseHelper.updateDatabase(employeeMap);
-    onEdited();
+
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+
+      DatabaseHelper.updateDatabase(employeeMap);
+      onEdited();
+    }
   }
 
   final note = EmployeeModel();
@@ -36,31 +43,10 @@ class EditNotePresenter extends GetxController {
   //   if (formKey.currentState!.validate()) {
   //     formKey.currentState!.save();
 
-  //     DatabaseHelper.insertData(databaseTableName, note.toJson()).then((value) {
-  //       if (value > 0) {
-  //         print(value);
-  //       }
-  //     }).catchError((error) => print(error));
-
-  //     showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) {
-  //         return const Dialog(
-  //           child: SizedBox(
-  //             height: 100,
-  //             // width: 100,
-  //             child: Center(child: CircularProgressIndicator()),
-  //           ),
-  //         );
-  //       },
-  //     );
-
-  //     await Future.delayed(const Duration(seconds: 1));
+  //     DatabaseHelper.insertData(databaseTableName, note.toJson())
 
   //     Navigator.of(context).pop();
   //     Navigator.of(context).pop();
-  //   } else {
-  //     throw Exception('Could not save');
   //   }
   // }
 //  EmployeeModel? employeeModel = EmployeeModel();
