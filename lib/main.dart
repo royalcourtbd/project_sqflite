@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_sqflite/presentation/note_list/note_list_page.dart';
+import 'package:project_sqflite/presentation/products_list/product_list_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: NoteListPage(),
+      home: ProductListPage(),
     );
   }
 }

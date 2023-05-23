@@ -4,13 +4,13 @@ import 'package:project_sqflite/data/employee_model.dart';
 import 'package:project_sqflite/presentation/note_list/note_list_ui_state.dart';
 
 class NoteListPresenter extends GetxController {
-  final Rx<NoteListUiState> uiState = Rx(NoteListUiState(
+  Rx<NoteListUiState> uiState = Rx(NoteListUiState(
     isLoading: false,
     employeeList: const [],
   ));
 
   Future<void> fetchNoteList() async {
-    uiState.value = uiState.value.copyWith(isLoading: true);
+    _loading();
     final List<EmployeeModel> employeeMapList =
         await DatabaseHelper.getAllEmployee();
     uiState.value =
@@ -27,4 +27,7 @@ class NoteListPresenter extends GetxController {
     super.onInit();
     fetchNoteList();
   }
+
+  void _loading() => uiState.value = uiState.value.copyWith(isLoading: true);
+  void _loaded() => uiState.value = uiState.value.copyWith(isLoading: false);
 }
