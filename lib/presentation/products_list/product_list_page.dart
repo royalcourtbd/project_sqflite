@@ -56,8 +56,10 @@ class ProductListPage extends StatelessWidget {
                                         Text('${products[index].price}\$'),
                                         ElevatedButton(
                                           onPressed: () {
-                                            _cartController
-                                                .addToCart(products[index]);
+                                            _productListController.insertCartProduct(
+                                              productModel: products[index],
+                                              onInserted: () {},
+                                            );
                                           },
                                           child: const Text('Add to cart'),
                                         ),
@@ -73,7 +75,7 @@ class ProductListPage extends StatelessWidget {
               ),
               const SizedBox(height: 50),
               Obx(() => Text(
-                    'Product Amount: \$ ${_cartController.totalPrice}',
+                    'Product Amount: \$ ${_cartController.uiState.value.totalPrice}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 22),
                   )),

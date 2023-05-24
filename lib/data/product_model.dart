@@ -1,5 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+const String productDatabaseName = 'productDatabase.db';
+const int productDatabaseVersion = 1;
+const String productDatabaseTableName = 'productTable';
+const String databaseTableName2 = 'productTable';
+const String databaseProductTableColumnId = 'id';
+const String databaseProductTableColumnName = 'name';
+const String databaseProductTableColumnImage = 'name';
+const String databaseProductTableColumnDescription = 'description';
+const double databaseProductTableColumnPrice = 12.5;
+
 class ProductModel {
   final int id;
   final String productName;

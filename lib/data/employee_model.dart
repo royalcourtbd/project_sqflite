@@ -3,6 +3,7 @@
 const String databaseName = 'employeeDatabase.db';
 const int databaseVersion = 1;
 const String databaseTableName = 'employeeTable';
+
 const String databaseEmployeeTableColumnId = 'id';
 const String databaseEmployeeTableColumnName = 'name';
 const String databaseEmployeeTableColumnDesignation = 'designation';
